@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.mapper.BookMapperCustom">
+  
+
+  <sql id="query_book_where">
+  	<if test="bookCustom!=null">
+  		<if test="bookCustom.bname!=null and bookCustom.bname!=''">
+  				bname like '%${bookCustom.bname}%'
+  		</if>
+  	</if>
+  </sql>
+
+  <select id="findBookList" parameterType="com.ssm.beans.BookQueryVo" resultType="com.ssm.beans.BookCustom">
+  	select * from book
+  		<where>
+  			<include refid="query_book_where"></include>
+  		</where>
+  </select>
+  
+</mapper>
